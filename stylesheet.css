@@ -1264,6 +1264,13 @@ audio {
 	display: none;
 }
 
+#hiddenImage {
+	position: fixed;
+	display: none;
+	pointer-events: none; /* 防止图片遮挡鼠标事件 */
+	width: 200px;
+	height: 250px;
+}
 .cake-cover {
 	margin-top: 50px;
 }
@@ -1280,7 +1287,19 @@ audio {
 	display: none;
 	font-weight: bold;
 }
-
+.message2 {
+	margin-top: 200px;
+	display: none;
+}
+.message2 p {
+	font-family: 'Signika', sans-serif;
+	font-size: 30px;
+	text-transform: uppercase;
+	color: #C4515C;
+	text-shadow: 2px 2px 2px #FFF;
+	display: none;
+	font-weight: bold;
+}
 .btn-primary {
         border-color: #466baf;
         padding: 10px;

@@ -2,6 +2,7 @@ $(window).load(function(){
 	$('.loading').fadeOut('fast');
 	$('.container').fadeIn('fast');
 });
+
 $('document').ready(function(){
 		var vw;
 		$(window).resize(function(){
@@ -27,6 +28,7 @@ $('document').ready(function(){
 		$('body').addClass('peach');
 		$(this).fadeOut('slow').delay(5000).promise().done(function(){
 			$('#play').fadeIn('slow');
+			// $('#story').fadeIn('slow');
 		});
 	});
 	$('#play').click(function(){
@@ -123,8 +125,12 @@ $('document').ready(function(){
 		$(this).fadeOut('slow').delay(5000).promise().done(function(){
 			$('#cake_fadein').fadeIn('slow');
 		});
+
 	});	
 
+	$('.cake').click(() => {
+		$("#imageContainer").toggle(); // 切换显示/隐藏图片
+	});
 	$('#cake_fadein').click(function(){
 		$('.cake').fadeIn('slow');
 		$(this).fadeOut('slow').delay(3000).promise().done(function(){
@@ -170,30 +176,65 @@ $('document').ready(function(){
 		$('.cake').fadeOut('fast').promise().done(function(){
 			$('.message').fadeIn('slow');
 		});
-		
-		var i;
 
+		var i;
 		function msgLoop (i) {
 			$("p:nth-child("+i+")").fadeOut('slow').delay(800).promise().done(function(){
-			i=i+1;
-			$("p:nth-child("+i+")").fadeIn('slow').delay(1000);
-			if(i==50){
-				$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
-					$('.cake').fadeIn('fast');
-				});
+				i=i+1;
+				$("p:nth-child("+i+")").fadeIn('slow').delay(1000);
 				
-			}
-			else{
-				msgLoop(i);
-			}			
+				if(i==50){
+					$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
+						console.log($('.message2').find('p:first').text());
+						$('.message2').fadeIn('slow');
+						$('.message2').find('p:first').fadeIn('slow');
+						$('.cake').fadeIn('fast');
+					});
+				}
+				else{
+					msgLoop(i);
+				}			
 
-		});
+			});
 			// body...
 		}
 		
 		msgLoop(0);
-		
 	});
+
+
+	var hiddenImage = $("#hiddenImage");
+	var isMouseDown = false;
+
+	$(document).mousedown(function() {
+		isMouseDown = true;
+	});
+
+	$(document).mouseup(function() {
+		isMouseDown = false;
+		hideImage();
+	});
+
+	$(document).mousemove(function(event) {
+		if (isMouseDown) {
+			// 获取鼠标位置
+			var mouseX = event.pageX;
+			var mouseY = event.pageY;
+
+			// 显示图片并设置位置
+			hiddenImage.css({
+				display: "block",
+				top: mouseY - hiddenImage.height() / 2,
+				left: mouseX - hiddenImage.width() / 2
+			});
+		}
+	});
+
+	function hideImage() {
+		hiddenImage.css({
+			display: "none"
+		});
+	}
 });
 
 
